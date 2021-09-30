@@ -45,7 +45,7 @@ function App() {
         <p>Hello Vite + React!</p>
         <div className="container" ref={containerNode} onScroll={calcRange}>
             <div style={{ marginTop: offset + 'px', height: viewHeight - offset + 'px' }}>
-              { showData.map(item => <div key={item} style={{ marginBottom: '10px', height: '40px', backgroundColor: 'teal' }}>{ item }</div>) }
+              { showData.map(item => <div key={item} style={{ display: 'inline-block', margin: '5px', width: '100%',height: '40px', backgroundColor: 'teal' }}>{ item }</div>) }
             </div>
 
         </div>
