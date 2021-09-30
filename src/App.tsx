@@ -1,42 +1,54 @@
-import React, { useState } from 'react'
-import logo from './logo.svg'
+import React, { useMemo, useRef, useState } from 'react'
 import './App.css'
 
+const itemHeight = 50
+
+const preLoad = 5
+
+const data = Array.from(Array(100).keys())
+
 function App() {
-  const [count, setCount] = useState(0)
+  const containerNode = useRef<HTMLDivElement>(null)
+  const viewHeight = useMemo(() => data.length * itemHeight, [])
+
+  const [range, setRange] = useState({ start: 0, end: 15 })
+  const calcRange = () => {
+    if (containerNode.current) {
+      const rangeOffset = Math.floor(containerNode.current.scrollTop / itemHeight) + 1
+      const viewItemSize: number = Math.ceil(containerNode.current.clientHeight / itemHeight);
+
+      const start = rangeOffset - preLoad
+      const startSize = start < 0 ? 0 : start
+
+      const end  =  rangeOffset + viewItemSize + preLoad
+      const endSize = end > data.length ? data.length : end
+
+      console.log(startSize)
+      console.log(endSize)
+
+      setRange({
+        start: startSize,
+        end: endSize,
+      })
+    }
+  }
+
+  const showData = useMemo(() => data.slice(range.start, range.end), [range])
+
+  const offset = useMemo(() => (range.start) * itemHeight, [range.start]);
+
+
 
   return (
     <div className="App">
       <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
         <p>Hello Vite + React!</p>
-        <p>
-          <button type="button" onClick={() => setCount((count) => count + 1)}>
-            count is: {count}
-          </button>
-        </p>
-        <p>
-          Edit <code>App.tsx</code> and save to test HMR updates.
-        </p>
-        <p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-          {' | '}
-          <a
-            className="App-link"
-            href="https://vitejs.dev/guide/features.html"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Vite Docs
-          </a>
-        </p>
+        <div className="container" ref={containerNode} onScroll={calcRange}>
+            <div style={{ marginTop: offset + 'px', height: viewHeight - offset + 'px' }}>
+              { showData.map(item => <div key={item} style={{ marginBottom: '10px', height: '40px', backgroundColor: 'teal' }}>{ item }</div>) }
+            </div>
+
+        </div>
       </header>
     </div>
   )
