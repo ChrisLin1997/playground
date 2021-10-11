@@ -1,0 +1,23 @@
+.circle {
+  fill: none;
+  stroke: #7C83FD;
+  stroke-width: 8;
+  stroke-dasharray: 628;
+  stroke-dashoffset: 628;
+  stroke-linecap: round;
+  transform: rotate(-90deg);
+  transform-origin: center;
+  animation: circle 2s infinite;
+}
+
+.circle-span {
+  position: absolute;
+  font-size: 36px;
+  color: white;
+}
+
+@keyframes circle {
+  100%{
+    stroke-dashoffset:0;
+  }
+}
