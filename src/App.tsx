@@ -4,7 +4,8 @@ import './App.css'
 import Layout from './pages/layout'
 import Home from './pages/home'
 import VirtualList from './pages/virtual-list'
-import CircleLoad from './pages/circle-load'
+import LoadCircle from './pages/load-circle'
+import LoadBall from './pages/load-ball'
 
 const App = () => (
   <div className="App">
@@ -13,7 +14,8 @@ const App = () => (
         <Switch>
           <Route exact path="/" component={Home} />
           <Route path="/virtual-list" component={VirtualList} />
-          <Route path="/circle-load" component={CircleLoad} />
+          <Route path="/load-circle" component={LoadCircle} />
+          <Route path="/load-ball" component={LoadBall} />
         </Switch>
       </Layout>
     </BrowserRouter> 

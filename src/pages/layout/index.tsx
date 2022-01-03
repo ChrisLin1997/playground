@@ -18,7 +18,8 @@ const Layout = ({ children }: LayoutProps) => {
         <aside className="layout-aside">
           <Link to="/">Home</Link>
           <Link to="/virtual-list">Virtual-List</Link>
-          <Link to="/circle-load">Circle-Load</Link>
+          <Link to="/load-circle">Load-Circle</Link>
+          <Link to="/load-ball">Load-Ball</Link>
         </aside>
 
         <main>
